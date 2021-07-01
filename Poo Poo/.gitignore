@@ -62,4 +62,7 @@ sysinfo.txt
 crashlytics-build.properties
 
 [Ll]ibrary/
+/[Ll]ibrary/
+Library/
+/Library/
 
