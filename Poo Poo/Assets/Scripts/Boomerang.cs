@@ -24,21 +24,37 @@ public class Boomerang : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //if (transform.position.y > returnPoint.y + 2)
-        //{
-        //    rigid.AddForce(new Vector2(0, -1) * verticalPower);
-        //}
-        //else if (transform.position.y > returnPoint.y)
-        //{
-        //    rigid.AddForce(new Vector2(0, -1) * verticalPower/2);
-        //}
-        //else if (transform.position.y < returnPoint.y - 2)
-        //{
-        //    rigid.AddForce(new Vector2(0, 1) * verticalPower);
-        //}
-        //else if (transform.position.y < returnPoint.y)
-        //{
-        //    rigid.AddForce(new Vector2(0, 1) * verticalPower/2);
-        //}
+        //Debug.Log(rigid.velocity.y);
+
+        if (transform.position.y > returnPoint.y + 1.5)
+        {
+            rigid.AddForce(new Vector2(0, -1) * verticalPower);
+            Debug.Log("fast");
+        }
+
+        // If close and going too fast
+        else if ((transform.position.y > returnPoint.y) && (Mathf.Abs(rigid.velocity.y) > .5))
+        {
+            //rigid.velocity = new Vector2(rigid.velocity.x, rigid.velocity.y);
+            rigid.AddForce(new Vector2(0, 1) * verticalPower * 3);
+            Debug.Log("slow");
+        }
+
+        else if (transform.position.y < returnPoint.y - 1.5)
+        {
+            rigid.AddForce(new Vector2(0, 1) * verticalPower);
+            Debug.Log("fast");
+        }
+
+        // If close and going too fast
+        else if ((transform.position.y > returnPoint.y) && (Mathf.Abs(rigid.velocity.y) > .5))
+        {
+            //rigid.velocity = new Vector2(rigid.velocity.x, rigid.velocity.y);
+            rigid.AddForce(new Vector2(0, -1) * verticalPower * 3);
+            Debug.Log("slow");
+        }
+
+        Vector2 forceDirection = returnPoint - new Vector2(transform.position.x, transform.position.y);
+        rigid.AddForce(forceDirection * verticalPower);
     }
 }
