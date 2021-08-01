@@ -25,6 +25,10 @@ public class Throw : MonoBehaviour
     [SerializeField]
     private float rotateInterval = 1f;
 
+    // Trigger that the boomerang stops in
+    public GameObject catchZone;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -78,6 +82,25 @@ public class Throw : MonoBehaviour
                 transform.Rotate(0.0f, 0.0f, -rotateInterval);
             }
             down = false;
+        }
+    }
+
+
+    // Function to set variable back when boomerang is caught
+    public void Caught()
+    {
+        launched = false;
+        body.velocity = Vector2.zero;
+        transform.position = catchZone.transform.position;
+        transform.rotation = Quaternion.Euler(0, 0, -90);
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject == catchZone)
+        {
+            Caught();
         }
     }
 }
