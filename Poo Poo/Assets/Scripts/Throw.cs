@@ -72,7 +72,6 @@ public class Throw : MonoBehaviour
                 transform.Rotate(0.0f, 0.0f, rotateInterval);
             }
             up = false;
-
         }
         else if(down == true && launched != true)
         {
