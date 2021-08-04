@@ -70,6 +70,5 @@ public class Bird : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         birdDeath();
-        // slow down boomerang
     }
 }

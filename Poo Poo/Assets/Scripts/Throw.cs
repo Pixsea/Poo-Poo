@@ -38,6 +38,7 @@ public class Throw : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Checks for inputs here and completes functionality of those inputs in fixedupdate
         if(Input.GetKeyDown(launchButton))
         {
             launch = true;
@@ -100,6 +101,11 @@ public class Throw : MonoBehaviour
         if (collision.gameObject == catchZone)
         {
             Caught();
+        }
+        else if(collision.gameObject.tag == "Bird")
+        {
+            // Slows down when it hits a bird
+            body.velocity = body.velocity*0.85f;
         }
     }
 }
