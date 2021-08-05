@@ -11,10 +11,11 @@ public class Bird : MonoBehaviour
     [SerializeField]
     private float birdSpeed = 1f;
     [SerializeField]
-    private float fallSpeed = -3f;
+    private float fallSpeed = 3f;
 
     Rigidbody2D body;
     SpriteRenderer m_SpriteRenderer;
+    Animator animator;
 
     [SerializeField]
     private float timeCountdown = 5;
@@ -27,6 +28,7 @@ public class Bird : MonoBehaviour
     {
         body = GetComponent<Rigidbody2D>();
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
         currentTime = timeCountdown;
     }
 
@@ -35,15 +37,18 @@ public class Bird : MonoBehaviour
         // add falling animation
         // make bird go down to ground
         dead = true;
-        body.velocity = new Vector2(0, fallSpeed);
+        //body.velocity = new Vector2(0, fallSpeed);
+        body.gravityScale = fallSpeed;
+        animator.Play("Bird_Death");
     }
 
     void FixedUpdate()
     {
-        // make bird move
         if (!dead)
         {
+            // make bird move
             body.velocity = new Vector2(birdSpeed, body.velocity.y);
+
             if (currentTime > 0)
             {
                 currentTime -= Time.deltaTime;
@@ -69,6 +74,12 @@ public class Bird : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        birdDeath();
+        // using tags for now but I can change it later if that would be better
+        if(collision.gameObject.tag == "Boomerang" && dead == false)
+        {
+            body.velocity = collision.gameObject.GetComponent<Rigidbody2D>().velocity;
+            birdDeath();
+        }
+
     }
 }

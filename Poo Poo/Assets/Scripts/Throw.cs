@@ -105,7 +105,7 @@ public class Throw : MonoBehaviour
         else if(collision.gameObject.tag == "Bird")
         {
             // Slows down when it hits a bird
-            body.velocity = body.velocity*0.85f;
+            body.velocity = body.velocity*0.75f;
         }
     }
 }

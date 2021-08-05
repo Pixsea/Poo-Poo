@@ -164,5 +164,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   birdSpeed: -1
-  fallSpeed: -3
+  fallSpeed: 1
   timeCountdown: 5
