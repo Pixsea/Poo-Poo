@@ -2,20 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bird : MonoBehaviour
+public class Airplane : MonoBehaviour
 {
 
-    // Make Bird move constantly
-    // Bird Movement: either move back and forth or some seemingly offscreen movement later
-
     [SerializeField]
-    private float birdSpeed = 1f;
-    [SerializeField]
-    private float fallSpeed = 3f;
+    private float planeSpeed = 1f;
 
     Rigidbody2D body;
     SpriteRenderer m_SpriteRenderer;
-    Animator animator;
 
     [SerializeField]
     private float timeCountdown = 5;
@@ -28,20 +22,15 @@ public class Bird : MonoBehaviour
     {
         body = GetComponent<Rigidbody2D>();
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
         currentTime = timeCountdown;
     }
 
-    void birdDeath()
+    void planeCrash()
     {
-        // add falling animation
-        // make bird go down to ground
+        //Debug.Log("Plane hit!");
         dead = true;
-        //body.velocity = new Vector2(0, fallSpeed);
-        body.gravityScale = fallSpeed;
-        animator.Play("Bird_Death");
-
-        //Debug.Log("Bird Died");
+        // for now, plane does not move
+        body.velocity = new Vector2(0,0);
     }
 
     public bool isDead()
@@ -54,7 +43,7 @@ public class Bird : MonoBehaviour
         if (!dead)
         {
             // make bird move
-            body.velocity = new Vector2(birdSpeed, body.velocity.y);
+            body.velocity = new Vector2(planeSpeed, body.velocity.y);
 
             if (currentTime > 0)
             {
@@ -63,11 +52,11 @@ public class Bird : MonoBehaviour
             else
             {
                 // Change direction of bird and reset timer
-                birdSpeed = birdSpeed * -1;
+                planeSpeed = planeSpeed * -1;
                 currentTime = timeCountdown;
 
                 // flips sprite
-                if(!m_SpriteRenderer.flipX)
+                if (!m_SpriteRenderer.flipX)
                 {
                     m_SpriteRenderer.flipX = true;
                 }
@@ -82,10 +71,10 @@ public class Bird : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // using tags for now but I can change it later if that would be better
-        if(collision.gameObject.tag == "Boomerang" && dead == false)
+        if (collision.gameObject.tag == "Boomerang" && dead == false)
         {
-            body.velocity = collision.gameObject.GetComponent<Rigidbody2D>().velocity;
-            birdDeath();
+            // body.velocity = collision.gameObject.GetComponent<Rigidbody2D>().velocity;
+            planeCrash();
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
         }
 

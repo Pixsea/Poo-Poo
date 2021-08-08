@@ -104,8 +104,15 @@ public class Throw : MonoBehaviour
         }
         else if(collision.gameObject.tag == "Bird")
         {
+            // Debug.Log("Boomerang Contact Bird");
             // Slows down when it hits a bird
             body.velocity = body.velocity*0.75f;
+        }
+        else if(collision.gameObject.tag == "Plane")
+        {
+            // Debug.Log("Boomerang Contact Plane");
+            // boomerang shot back
+            body.velocity = body.velocity*-1f;
         }
     }
 }
