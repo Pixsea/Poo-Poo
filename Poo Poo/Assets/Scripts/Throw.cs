@@ -45,6 +45,7 @@ public class Throw : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Checks for inputs here and completes functionality of those inputs in fixedupdate
         if(Input.GetKeyDown(launchButton))
         {
             launch = true;
@@ -81,7 +82,6 @@ public class Throw : MonoBehaviour
                 transform.Rotate(0.0f, 0.0f, rotateInterval);
             }
             up = false;
-
         }
         else if(down == true && launched != true)
         {
@@ -112,6 +112,18 @@ public class Throw : MonoBehaviour
         if (collision.gameObject == catchZone)
         {
             Caught();
+        }
+        else if(collision.gameObject.tag == "Bird")
+        {
+            // Debug.Log("Boomerang Contact Bird");
+            // Slows down when it hits a bird
+            body.velocity = body.velocity*0.75f;
+        }
+        else if(collision.gameObject.tag == "Plane")
+        {
+            // Debug.Log("Boomerang Contact Plane");
+            // boomerang shot back
+            body.velocity = body.velocity*-1f;
         }
     }
 }
