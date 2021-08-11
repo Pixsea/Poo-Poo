@@ -8,6 +8,11 @@ public class Throw : MonoBehaviour
     Rigidbody2D body;
 
     [SerializeField]
+    private GameObject boomerangSprite;  // Sprite to enable and disable
+    [SerializeField]
+    private GameObject aimingReticle;  // Reticle to enable and disable
+
+    [SerializeField]
     private float throwForce = 200;
 
     [SerializeField]
@@ -33,6 +38,8 @@ public class Throw : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        aimingReticle.SetActive(true);
+        boomerangSprite.SetActive(false);
     }
 
     // Update is called once per frame
@@ -62,6 +69,8 @@ public class Throw : MonoBehaviour
             body.AddForce(transform.up * throwForce);
             launch = false;
             launched = true;
+            aimingReticle.SetActive(false);
+            boomerangSprite.SetActive(true);
         }
 
         if (up == true && launched != true)
@@ -90,6 +99,8 @@ public class Throw : MonoBehaviour
     public void Caught()
     {
         launched = false;
+        aimingReticle.SetActive(true);
+        boomerangSprite.SetActive(false);
         body.velocity = Vector2.zero;
         transform.position = catchZone.transform.position;
         transform.rotation = Quaternion.Euler(0, 0, -90);
