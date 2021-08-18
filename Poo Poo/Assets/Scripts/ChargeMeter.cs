@@ -13,6 +13,10 @@ public class ChargeMeter : MonoBehaviour
     private bool meterActive = false;  // Whether the meter should be moving
     private bool meterIncreasing = true;  // Whether the meter is currently icnreasing in value
 
+    [SerializeField]
+    private GameObject boomerang;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +35,7 @@ public class ChargeMeter : MonoBehaviour
 
         else if (Input.GetKeyDown(inputKey) && meterActive)
         {
-            Debug.Log(chargeMeter.value);
+            boomerang.GetComponent<Throw>().ThrowBoomerang(chargeMeter.value);
             meterActive = false;
             StartCoroutine(DisableMeterAfterTime(1));
         }
@@ -42,6 +46,7 @@ public class ChargeMeter : MonoBehaviour
     {
         if (meterActive)
         {
+            //  Increase meter
             if (meterIncreasing)
             {
                 chargeMeter.value += .1f;
@@ -51,6 +56,8 @@ public class ChargeMeter : MonoBehaviour
                     meterIncreasing = false;
                 }
             }
+
+            // Decrease meter
             else
             {
                 chargeMeter.value -= .1f;
@@ -64,6 +71,7 @@ public class ChargeMeter : MonoBehaviour
     }
 
 
+    // Keep charge meter on screen so players sees how full it was
     IEnumerator DisableMeterAfterTime(float time)
     {
         yield return new WaitForSeconds(time);

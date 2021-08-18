@@ -595,6 +595,7 @@ GameObject:
   - component: {fileID: 1135880407}
   - component: {fileID: 1135880406}
   - component: {fileID: 1135880405}
+  - component: {fileID: 1135880408}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -609,13 +610,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1135880404}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec92f27242b74334d8369f50071b5943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   inputKey: 32
   chargeMeter: {fileID: 721472010}
+  boomerang: {fileID: 1874471648}
 --- !u!212 &1135880406
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -655,7 +657,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e723e0d460e928c4c86b3de3a34cce6f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8b2f46c4900a29c44aa35c33b0ce35cb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -675,12 +677,31 @@ Transform:
   m_GameObject: {fileID: 1135880404}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children:
   - {fileID: 1760920631}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1135880408
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1135880404}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7a6f333b8ae4f984a8f84bd0620676bc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1274076807
 GameObject:
   m_ObjectHideFlags: 0
@@ -793,7 +814,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 0.25
 --- !u!1 &1874471648
 GameObject:
   m_ObjectHideFlags: 0
@@ -904,6 +925,7 @@ MonoBehaviour:
   launchButton: 32
   rotateInterval: 1
   catchZone: {fileID: 1760920630}
+  monkeyAnimator: {fileID: 1135880408}
 --- !u!1 &2061607319
 GameObject:
   m_ObjectHideFlags: 0
@@ -914,6 +936,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2061607320}
   - component: {fileID: 2061607321}
+  - component: {fileID: 2061607322}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -930,11 +953,11 @@ Transform:
   m_GameObject: {fileID: 2061607319}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children: []
   m_Father: {fileID: 1874471652}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 13.7699995}
 --- !u!212 &2061607321
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -974,7 +997,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1079ddfb5d6ed304baf4eb932de65c44, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cd23288bf873be8499401525f84f25b7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -985,6 +1008,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &2061607322
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2061607319}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e2d0a630f572155499e455f359aad52b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1131069453156295015
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -995,7 +1037,7 @@ PrefabInstance:
     - target: {fileID: 1145597626675170311, guid: 0183bba31666a3246b0a50459d3cead7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1145597626675170311, guid: 0183bba31666a3246b0a50459d3cead7,
         type: 3}

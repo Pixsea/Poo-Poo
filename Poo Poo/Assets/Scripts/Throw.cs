@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Throw : MonoBehaviour
 {
-
     Rigidbody2D body;
 
     [SerializeField]
@@ -32,6 +31,9 @@ public class Throw : MonoBehaviour
 
     // Trigger that the boomerang stops in
     public GameObject catchZone;
+
+    [SerializeField]
+    private Animator monkeyAnimator;
 
 
     // Start is called before the first frame update
@@ -67,11 +69,7 @@ public class Throw : MonoBehaviour
     {
         if (launch == true && launched != true)
         {
-            body.AddForce(transform.up * throwForce);
-            launch = false;
-            launched = true;
-            aimingReticle.SetActive(false);
-            boomerangSprite.SetActive(true);
+            // Throw()
         }
 
         if (up == true && launched != true)
@@ -104,6 +102,18 @@ public class Throw : MonoBehaviour
         body.velocity = Vector2.zero;
         transform.position = catchZone.transform.position;
         transform.rotation = Quaternion.Euler(0, 0, -90);
+    }
+
+
+    //  Thorw boomerang with a given amount of charge
+    public void ThrowBoomerang(float charge)
+    {
+        body.AddForce(transform.up * throwForce * 2 * charge);
+        //launch = false;
+        launched = true;
+        aimingReticle.SetActive(false);
+        boomerangSprite.SetActive(true);
+        monkeyAnimator.SetTrigger("Throw");
     }
 
 
